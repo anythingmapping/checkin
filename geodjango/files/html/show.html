@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Simple markers</title>
+    <style>
+      html, body, #map-canvas {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+        div.richMarkerDiv {
+            background-image: url('http://40.media.tumblr.com/6275b9b8e75ef9825a517d07d459de63/tumblr_nrnvr1pmsA1uwos2wo1_100.png');
+            width: 100px;
+        height: 130px;
+        }
+        .clickable {
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+    </style>
+  
+       
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true"></script>
+    <script src="/static/js/rich.js"></script>
+    
+     <script type="text/javascript"> 
+        function mapify() {
+            var myLatlng = new google.maps.LatLng({{myarray.0.3}},{{myarray.0.3}});
+  var mapOptions = {
+    zoom: 3,
+    center: myLatlng
+  }
+  var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+  {% for x in myarray %}
+    
+  var richMarkerHtml = '<div class="richMarkerDiv"><a target="_blank" href="http://www.google.com"><img style="position:relative;margin:10px;width:80px;height:80px;border-radius:40px;" src="{{x.1}}"></img></a></div>';
+         var marker = new RichMarker({
+              map: map,
+          flat: true,
+          position: new google.maps.LatLng({{x.3}},{{x.4}}),
+              draggable: false,
+              content: richMarkerHtml
+         });
+  {% endfor %}
+        
+        
+        }
+    
+</script>
+     
+  </head>
+  <body onload="mapify();">
+    <div id="map-canvas"></div>
+  </body>
+</html>
+
+

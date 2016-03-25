@@ -1,0 +1,49 @@
+<!doctype html>
+
+<html lang="eng">
+<head>
+    <title>Check-in</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+     <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.0.min.js">
+     </script>
+</head>
+<body>
+    <center>
+    <h1> welcome to the checkin page </h1>
+    <h2> you appear to be visiting from {{ cc }} </h2><br><br> 
+        <form action="/register/" method="post">
+            <input class ="form-control" style="width:200px" placeholder="username" type="text" id="username" name="username"><br>
+            <input class ="form-control" style="width:200px" placeholder="image" type="text" id="userimage" name="userimage"><br>
+            <input class ="form-control" style="width:200px" placeholder="long" type="text" id="long" name="long"><br>
+            <input class ="form-control" style="width:200px" placeholder="lat" type="text" id="lat" name="lat"><br><br>
+            <input class='btn btn-info' type="submit" value="checkin">
+        </form>
+        <br><br>
+
+        <button class='btn btn-warning' onclick="getLocation()">geolocate</button>
+
+
+    </center>
+</body>
+
+
+<script>
+var x = document.getElementById("demo");
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else { 
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+}
+
+
+function showPosition(position) {
+    $('#long').val(position.coords.latitude);
+    $('#lat').val(position.coords.longitude);
+
+}
+
+</script>
+</html>
